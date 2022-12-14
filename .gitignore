@@ -1,0 +1,5 @@
+.idea
+*.zip
+venv
+msmarco-distilbert-cos-v5-model
+sentence_transformers_lib
