@@ -1,9 +1,17 @@
+import subprocess
 import sys
 
 sentence_transformers_path = '/Users/seancooper/code/sentence_transformers/sentence_transformers_lib'
 sys.path.append(sentence_transformers_path)
 
-from sentence_transformers import SentenceTransformer, util
+try:
+    from sentence_transformers import SentenceTransformer, util
+except ImportError:
+    subprocess.check_call(
+        [sys.executable, "-m", "pip", "install", 'sentence_transformers', f'--target={sentence_transformers_path}']
+    )
+finally:
+    from sentence_transformers import SentenceTransformer, util
 
 query = "A significant proportion of alcoholics manage to live with the disease daily"
 docs = [
@@ -15,9 +23,9 @@ docs = [
 ]
 
 
-model = SentenceTransformer('sentence-transformers/msmarco-distilbert-cos-v5')
 modelPath = "./msmarco-distilbert-cos-v5-model"
-model.save(modelPath)
+# model = SentenceTransformer('sentence-transformers/msmarco-distilbert-cos-v5')
+# model.save(modelPath)
 model = SentenceTransformer(modelPath)
 
 
